@@ -35,7 +35,6 @@ public class InputView {
                 String rawInput = Console.readLine();
                 validator.orderCheck(rawInput);
                 List<String> menuList = List.of(rawInput.split(","));
-
                 return orderToList(menuList);
             }catch (IllegalArgumentException e){
                 System.out.println(e.getMessage());
