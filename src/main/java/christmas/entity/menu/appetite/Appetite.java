@@ -1,6 +1,6 @@
-package christmas.entity.appetite;
+package christmas.entity.menu.appetite;
 
-import christmas.entity.Menu;
+import christmas.entity.menu.Menu;
 
 public class Appetite implements Menu {
 

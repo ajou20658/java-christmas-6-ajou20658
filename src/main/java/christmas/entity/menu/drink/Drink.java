@@ -1,6 +1,6 @@
-package christmas.entity.drink;
+package christmas.entity.menu.drink;
 
-import christmas.entity.Menu;
+import christmas.entity.menu.Menu;
 
 public class Drink implements Menu {
     @Override

@@ -1,4 +1,4 @@
-package christmas.entity.dessert;
+package christmas.entity.menu.dessert;
 
 public class ChocoCake extends Dessert{
 }
