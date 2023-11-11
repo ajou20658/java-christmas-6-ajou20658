@@ -4,7 +4,7 @@ import christmas.entity.menu.Menu;
 
 import java.util.List;
 
-public class DDayDiscount implements Discount {
+public class DDayDiscount implements Discount<Menu> {
     private final Integer discountAmount;
     private final Integer EndDate;
     private Integer realDiscount;

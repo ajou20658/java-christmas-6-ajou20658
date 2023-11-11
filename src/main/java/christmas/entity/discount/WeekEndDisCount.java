@@ -1,10 +1,11 @@
 package christmas.entity.discount;
 
 import christmas.entity.menu.Menu;
+import christmas.entity.menu.main.Main;
 
 import java.util.List;
 
-public class WeekEndDisCount implements Discount{
+public class WeekEndDisCount implements Discount<Main> {
     private final Integer discountAmount;
     private final List<Integer> weekEnd;
     private Integer realDiscount;
@@ -27,7 +28,7 @@ public class WeekEndDisCount implements Discount{
     }
 
     @Override
-    public Integer totalDiscount(List<Menu> menuList) {
+    public Integer totalDiscount(List<Main> menuList) {
         return menuList.size()*realDiscount;
     }
 }
