@@ -1,4 +1,11 @@
 package christmas.entity.appetite;
 
-public interface Appetite {
+import christmas.entity.Menu;
+
+public class Appetite implements Menu {
+
+    @Override
+    public Integer discount() {
+        return null;
+    }
 }

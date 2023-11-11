@@ -1,4 +1,4 @@
 package christmas.entity.drink;
 
-public class ZeroCoke implements Drink{
+public class ZeroCoke extends Drink{
 }

@@ -1,4 +1,8 @@
 package christmas.entity.appetite;
 
-public class Tapas implements Appetite{
+public class Tapas extends Appetite{
+    @Override
+    public Integer discount() {
+        return null;
+    }
 }

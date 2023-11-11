@@ -1,4 +1,7 @@
 package christmas.entity.discount;
 
-public interface Discount {
+import christmas.entity.Menu;
+
+public interface Discount{
+
 }

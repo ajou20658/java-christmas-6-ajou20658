@@ -1,4 +1,4 @@
 package christmas.entity.dessert;
 
-public class ChocoCake {
+public class ChocoCake extends Dessert{
 }
