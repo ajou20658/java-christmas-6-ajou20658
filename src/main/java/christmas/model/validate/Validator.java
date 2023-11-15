@@ -58,8 +58,9 @@ public class Validator {
         int allCount = 0;
         int drinkCount = 0;
         for(Menu i: orderList.keySet()){
-            System.out.println();
-            if(i.getClass().isInstance(Drink.class)){
+//            System.out.println(i.getClass().getSuperclass());
+            Class<?> type = i.getClass().getSuperclass();
+            if(type==Drink.class){
                 drinkCount += orderList.get(i);
             }
             allCount += orderList.get(i);
