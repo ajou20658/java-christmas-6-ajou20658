@@ -15,41 +15,46 @@ public class Validator {
     private String numberRegex = "^[0-9]*";
     private String orderRegex = "^[가-힣]+-[0-9]+(,[가-힣]+-[0-9]+)*$";
     List<String> menuList;
+    public static final String error = "[ERROR] ";
+    public static final String dayError = "유효하지 않은 주문입니다. 다시 입력해 주세요.";
+    public static final String orderError = "유효하지 않은 날짜입니다. 다시 입력해 주세요.";
     public Validator(){
         menuList = MenuItem.getMenuNames();
     }
     public void numberCheck(String rawInput){
         if(!rawInput.matches(numberRegex)){
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(error+dayError);
         }
     }
     public void decemberDateRangeCheck(Integer input){
         if(input>MAX_DATE){
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(error+dayError);
         }
         if(input<MIN_DATE){
-            throw new IllegalArgumentException("[ERROR] 올바른 날짜를 입력하세요.");
+            throw new IllegalArgumentException(error+dayError);
         }
     }
     public void orderCheck(String rawInput){
         if(!rawInput.matches(orderRegex)){
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(error+orderError);
         }
     }
     public void orderListCheck(Map<Menu,Integer> orderList){
-        orderOnlyDrink(orderList);
+        orderOnlyDrinkAndTotalCount(orderList);
         for(Menu i : orderList.keySet()){
             orderRangeCheck(orderList.get(i));
         }
 
+
     }
     public void orderRangeCheck(Integer input){
-        if(input<MIN_ORDER || input >MAX_ORDER){
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        if(input<MIN_ORDER){
+            throw new IllegalArgumentException(error+orderError);
         }
     }
+
 //    public void orderDuplicateCheck(Map<>)
-    public void orderOnlyDrink(Map<Menu,Integer> orderList){
+    public void orderOnlyDrinkAndTotalCount(Map<Menu,Integer> orderList){
         int allCount = 0;
         int drinkCount = 0;
         for(Menu i: orderList.keySet()){
@@ -59,12 +64,15 @@ public class Validator {
             allCount += orderList.get(i);
         }
         if(drinkCount==allCount){
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(error+orderError);
+        }
+        if(allCount>MAX_ORDER){
+
         }
     }
     public void orderNameCheck(String rawInput){
         if(!menuList.contains(rawInput)){
-            throw new IllegalArgumentException("[ERROR] 올바른 메뉴를 입력하세요.");
+            throw new IllegalArgumentException(error+orderError);
         }
     }
 
