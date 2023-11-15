@@ -29,7 +29,7 @@ public class WeekEndDisCount implements Discount<Main> {
 
     @Override
     public boolean condition(int day, int totalCost) {
-        return weekEnd.contains(day)&&totalCost>=minCost;
+        return weekEnd.contains(day%7)&&totalCost>=minCost;
     }
 
     @Override
