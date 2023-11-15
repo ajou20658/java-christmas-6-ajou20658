@@ -10,11 +10,12 @@ public enum Badge {
         this.name = name;
         this.min = min;
     }
-    public static Badge publishBadge(Integer beforeTotalCost){
+    public static Badge publishBadge(Integer totalDiscount){
         Badge badge = null;
         for(Badge i:Badge.values()){
-            if(i.min<=beforeTotalCost){
+            if(i.min<=totalDiscount){
                 badge = i;
+
             }
         }
         return badge;

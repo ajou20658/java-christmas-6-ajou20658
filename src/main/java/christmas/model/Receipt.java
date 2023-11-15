@@ -41,7 +41,7 @@ public class Receipt {
         boolean isValid = ChampagneGift.wineValidate(beforeTotalCost);
         if(isValid){
             this.gift = ChampagneGift.give();
-            this.giftPrice -= MenuItem.findPrice(gift);
+            this.giftPrice = MenuItem.findPrice(gift);
         }
     }
     public void setBadge(){
@@ -68,10 +68,10 @@ public class Receipt {
         return MenuItem.findMenuName(gift);
     }
     public String getBadgetName(){
-        if(badge==null){
-            return null;
+        if(badge!=null){
+            return badge.getName();
         }
-        return badge.getName();
+        return null;
     }
     public Integer getDay(){
         return day;
@@ -80,11 +80,10 @@ public class Receipt {
         return menuList;
     }
     public List<Discount<? extends Menu>> getDiscountList(){
-
         return discountList;
     }
     public Integer getDiscountedAmount(){
-        return discountAmount-giftPrice;
+        return discountAmount+giftPrice;
     }
 
     public boolean getGift(){
