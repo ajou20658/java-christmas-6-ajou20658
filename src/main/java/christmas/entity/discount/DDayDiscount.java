@@ -2,30 +2,50 @@ package christmas.entity.discount;
 
 import christmas.entity.menu.Menu;
 
-import java.util.List;
-
+import java.util.Map;
 public class DDayDiscount implements Discount<Menu> {
+    private final String eventName;
     private final Integer discountAmount;
-    private final Integer EndDate;
+    private final Integer endDate;
+    private final Integer minCost;
     private Integer realDiscount;
-    public DDayDiscount(Integer discountAmount,Integer endDate){
+    private Integer totalDiscount;
+    public DDayDiscount(String name, Integer discountAmount,Integer endDate,Integer minCost){
+        this.eventName = name;
         this.discountAmount=discountAmount;
-        this.EndDate = endDate;
-    }
-    @Override
-    public boolean condition(int day){
-        return day <= EndDate;
-    }
-    @Override
-    public Integer totalDiscount(List<Menu> menuList) {
-        return realDiscount;
+        this.endDate = endDate;
+        this.minCost = minCost;
     }
 
     @Override
-    public void setDiscount(int day) {
-        realDiscount = 0;
-        if(condition(day)){
-            realDiscount = discountAmount+(day-1)*100;
+    public boolean condition(int day,int cost){
+        return (day <= endDate)&&cost>=minCost;
+    }
+    @Override
+    public void setTotalDiscount(Map<? extends Menu, Integer> menuList) {
+        this.totalDiscount = realDiscount;
+    }
+    @Override
+    public Integer getTotalDiscount(){
+        return totalDiscount;
+    }
+
+    @Override
+    public String getName() {
+        return eventName;
+    }
+
+    @Override
+    public Class<Menu> getDiscountMenuType() {
+        return Menu.class;
+    }
+
+
+    @Override
+    public void setDiscount(int day,int totalCost) {
+        this.realDiscount = 0;
+        if(condition(day,totalCost)){
+            this.realDiscount = discountAmount+(day-1)*100;
         }
     }
 }
