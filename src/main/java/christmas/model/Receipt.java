@@ -10,6 +10,7 @@ import christmas.filter.MenuFilter;
 import java.util.List;
 import java.util.Map;
 
+import static christmas.entity.menu.MenuItem.CHAMPAGNE;
 import static christmas.entity.menu.MenuItem.findPrice;
 
 public class Receipt {
@@ -17,7 +18,8 @@ public class Receipt {
     private Integer day;
     private final Map<? extends Menu,Integer> menuList;
     private Integer beforeTotalCost;    //total cost
-    private Integer afterTotalCost;     //discounted cost
+    private Integer discountAmount;
+    private Integer giftPrice;
     private Menu gift; //증정 메뉴
     private Badge badge; //2024년 이벤트 뱃지
     public Receipt(List<Discount<? extends Menu>> discountList,Map<Menu,Integer> menuList,Integer day){
@@ -25,7 +27,8 @@ public class Receipt {
         this.menuList = menuList;
         this.day = day;
         this.beforeTotalCost=0;
-        this.afterTotalCost=0;
+        this.discountAmount=0;
+        this.giftPrice=0;
     }
     public void setTotalCost(){
         this.beforeTotalCost=0;
@@ -38,26 +41,25 @@ public class Receipt {
         boolean isValid = ChampagneGift.wineValidate(beforeTotalCost);
         if(isValid){
             this.gift = ChampagneGift.give();
-            this.afterTotalCost -= MenuItem.findPrice(gift);
+            this.giftPrice -= MenuItem.findPrice(gift);
         }
     }
     public void setBadge(){
-        int input = beforeTotalCost - afterTotalCost;
+        int input = discountAmount + giftPrice;
         this.badge = Badge.publishBadge(input);
     }
     public void setDiscount() {
-        this.afterTotalCost = beforeTotalCost;
         for (Discount<? extends Menu> discount : discountList) {
             Class<? extends Menu> menuType = discount.getDiscountMenuType();
             Map<Menu, Integer> tmp = MenuFilter.filterByType(menuList, menuType);
 
             discount.setDiscount(day,beforeTotalCost);
             discount.setTotalDiscount(tmp);
-            this.afterTotalCost -= discount.getTotalDiscount();
+            this.discountAmount += discount.getTotalDiscount();
         }
     }
     public Integer getAfterTotalCost(){
-        return afterTotalCost;
+        return beforeTotalCost-discountAmount;
     }
     public Integer getBeforeTotalCost(){
         return beforeTotalCost;
@@ -78,9 +80,17 @@ public class Receipt {
         return menuList;
     }
     public List<Discount<? extends Menu>> getDiscountList(){
+
         return discountList;
     }
     public Integer getDiscountedAmount(){
-        return afterTotalCost-beforeTotalCost;
+        return discountAmount-giftPrice;
+    }
+
+    public boolean getGift(){
+        if(gift==CHAMPAGNE.getMenu()){
+            return true;
+        }
+        return false;
     }
 }

@@ -20,7 +20,8 @@ public class SpecialDiscount implements Discount<Menu>{
     }
     @Override
     public boolean condition(int day,int totalCost){
-        return specialDay.contains(day);
+
+        return specialDay.contains(day)&&totalCost>=minCost;
     }
 
     @Override

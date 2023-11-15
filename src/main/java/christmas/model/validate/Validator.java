@@ -58,16 +58,19 @@ public class Validator {
         int allCount = 0;
         int drinkCount = 0;
         for(Menu i: orderList.keySet()){
-            if(i.getClass()== Drink.class){
+            System.out.println();
+            if(i.getClass().isInstance(Drink.class)){
                 drinkCount += orderList.get(i);
             }
             allCount += orderList.get(i);
         }
+//        System.out.println(drinkCount);
+//        System.out.println(allCount);
         if(drinkCount==allCount){
             throw new IllegalArgumentException(error+orderError);
         }
         if(allCount>MAX_ORDER){
-
+            throw new IllegalArgumentException(error+orderError);
         }
     }
     public void orderNameCheck(String rawInput){

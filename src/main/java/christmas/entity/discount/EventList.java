@@ -9,7 +9,8 @@ public enum EventList {
     DDAY("크리스마스 디데이 할인",1000,25, List.of(),10000),
     WEEKDAY("평일 할인",2023,31,List.of(3,4,5,6,7),10000),
     WEEKEND("주말 할인",2023,31,List.of(1,2),10000),
-    SPECIAL("특별 할인",1000,31,List.of(3,10,17,24,25,31),10000)
+    SPECIAL("특별 할인",1000,31,List.of(3,10,17,24,25,31),10000),
+    GIFT("증정 이벤트",null,null,null,null)
     ;
 
     private String name;

@@ -32,7 +32,6 @@ public class WeekDayDiscount implements Discount<Dessert>{
             totalCount += menuList.get(i);
         }
         this.totalDiscount = totalCount*realDiscount;
-        System.out.println(this.totalDiscount);
     }
 
     @Override
