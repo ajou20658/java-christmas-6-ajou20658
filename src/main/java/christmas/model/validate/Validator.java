@@ -16,8 +16,8 @@ public class Validator {
     private String orderRegex = "^[가-힣]+-[0-9]+(,[가-힣]+-[0-9]+)*$";
     List<String> menuList;
     public static final String error = "[ERROR] ";
-    public static final String dayError = "유효하지 않은 주문입니다. 다시 입력해 주세요.";
-    public static final String orderError = "유효하지 않은 날짜입니다. 다시 입력해 주세요.";
+    public static final String dayError = "유효하지 않은 날짜입니다. 다시 입력해 주세요.";
+    public static final String orderError = "유효하지 않은 주문입니다. 다시 입력해 주세요.";
     public Validator(){
         menuList = MenuItem.getMenuNames();
     }
