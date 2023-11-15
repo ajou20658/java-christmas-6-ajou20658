@@ -43,6 +43,7 @@ public class OutputView {
         System.out.println(giftMenu);
         if(gift.isEmpty()){
             System.out.println(none);
+            System.out.println();
             return;
         }
         System.out.println(gift+" 1개");
@@ -60,6 +61,7 @@ public class OutputView {
             return;
         }
         System.out.println(none);
+        System.out.println();
         System.out.println(totalDiscount);
         System.out.printf(wonFormat,(-1)*total);
         System.out.println();
